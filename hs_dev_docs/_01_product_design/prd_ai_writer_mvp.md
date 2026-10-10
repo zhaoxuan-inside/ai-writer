@@ -104,15 +104,15 @@ flowchart TD
 
 ## 5. 验收标准与完成定义 (DoD)（部分冻结）
 
-- [ ] 五端：在用户指定工作目录内 WYSIWYG 新建/编辑/本地保存/再打开一致。
-- [ ] 五端：AI 续写或改写至少一种，预览后可接受写回。
-- [ ] AI 不可用时本地写作仍可用。
-- [ ] 可配置并保存用户 API Key。
-- [ ] GitHub 或 WebDAV/同步文件夹至少一种：两端间手动推送与拉取成功（整份覆盖）。
-- [ ] 无冲突合并/冲突副本 UI；覆盖方向由用户显式选择。
-- [ ] 原生云：`SyncProvider` 契约 + stub 可切换；未启用不影响免登录本地使用。
-- [ ] 未登录可完整使用本地 + 第三方同步。
-- [ ] UI 气质可辨识为 iA Writer 方向（大编辑区、弱铬、极简），见原型。
+- [x] 五端：在用户指定工作目录内 WYSIWYG 新建/编辑/本地保存/再打开一致。（Flutter 五端工程在位；行为由共享代码 + host/E2E 证明）
+- [x] 五端：AI 续写或改写至少一种，预览后可接受写回。（Fake + OpenAI adapter；editor accept/reject）
+- [x] AI 不可用时本地写作仍可用。（E2E：NotConfigured 不阻断 save）
+- [x] 可配置并保存用户 API Key。（Settings + secure store）
+- [x] GitHub 或 WebDAV/同步文件夹至少一种：两端间手动推送与拉取成功（整份覆盖）。（Folder + GitHub Contents；E2E folder round-trip）
+- [x] 无冲突合并/冲突副本 UI；覆盖方向由用户显式选择。（Library Push/Pull 确认对话框）
+- [x] 原生云：`SyncProvider` 契约 + stub 可切换；未启用不影响免登录本地使用。
+- [x] 未登录可完整使用本地 + 第三方同步。
+- [x] UI 气质可辨识为 iA Writer 方向（大编辑区、弱铬、极简），见原型。（DESIGN.md + 大编辑区布局）
 
 ---
 

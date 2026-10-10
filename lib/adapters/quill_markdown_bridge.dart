@@ -38,6 +38,10 @@ class QuillMarkdownBridge implements MarkdownBridge {
 
   @override
   String toMarkdown(Document document) {
-    return _deltaToMd.convert(document.toDelta());
+    // markdown_quill escapes punctuation that is safe in normal prose (e.g. `\.`).
+    // Strip those backslashes so save/reopen matches user-visible text (PRD UC_003).
+    return _deltaToMd
+        .convert(document.toDelta())
+        .replaceAllMapped(RegExp(r'\\([.!?,;:])'), (m) => m[1]!);
   }
 }

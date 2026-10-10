@@ -22,6 +22,13 @@ void main() {
     expect(out, contains('#'));
   });
 
+  test('preserves sentence-ending period without backslash escape', () {
+    const src = 'Hello world.\n';
+    final out = roundTrip(src);
+    expect(out, contains('Hello world.'));
+    expect(out, isNot(contains(r'\.')));
+  });
+
   test('preserves bold and italic markers', () {
     const src = 'This is **bold** and *italic* text\n';
     final out = roundTrip(src);
