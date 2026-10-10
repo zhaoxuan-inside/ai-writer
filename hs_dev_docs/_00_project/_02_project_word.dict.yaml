@@ -1,0 +1,61 @@
+# 统一项目术语词典
+terms:
+  - term: "文档"
+    en_name: "document"
+    abbr: "doc"
+    scope: "domain_model"
+    note: "用户写作的基本单位；MVP 本地持久化"
+
+  - term: "创作者"
+    en_name: "creator"
+    abbr: "creator"
+    scope: "actor"
+    note: "个人创作者：博客/公众号/小说/文案"
+
+  - term: "AI 辅助写作"
+    en_name: "ai_assist"
+    abbr: "ai_assist"
+    scope: "capability"
+    note: "续写/改写/扩写；结果可接受或拒绝后写回文档"
+
+  - term: "本地优先"
+    en_name: "local_first"
+    abbr: "local_first"
+    scope: "product_principle"
+    note: "默认本地持久化；跨设备互通策略见 PRD 审讯结论"
+
+  - term: "五端"
+    en_name: "five_platforms"
+    abbr: "p5"
+    scope: "product_scope"
+    note: "Windows / Linux / macOS / iOS / Android；MVP 同进"
+
+  - term: "同步提供者"
+    en_name: "sync_provider"
+    abbr: "sync_provider"
+    scope: "domain_model"
+    note: "统一同步抽象；实现含云存储、GitHub、原生云等"
+
+  - term: "原生云端"
+    en_name: "native_cloud"
+    abbr: "native_cloud"
+    scope: "domain_model"
+    note: "本产品商业化云同步；唯一需要注册/登录的路径"
+
+  - term: "所见即所得"
+    en_name: "wysiwyg"
+    abbr: "wysiwyg"
+    scope: "capability"
+    note: "富文本+Markdown 语义的可视化编辑；用户聚焦写作"
+
+  - term: "工作目录"
+    en_name: "library_root"
+    abbr: "library_root"
+    scope: "domain_model"
+    note: "用户指定的文档库根；组织方式由用户文件夹结构决定"
+
+  - term: "iA Writer 气质"
+    en_name: "ia_writer_aesthetic"
+    abbr: "ia_aesthetic"
+    scope: "product_principle"
+    note: "视觉与信息架构对标：极简、大编辑区、弱工具铬"

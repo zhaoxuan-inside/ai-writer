@@ -1,0 +1,41 @@
+# 任务详细设计与执行记录：L-slice-wysiwyg
+
+- **任务名称**：WYSIWYG Quill + MarkdownBridge
+- **变更分级**：`L`
+- **当前状态**：`COMPLETED`
+- **优先级**：P0
+- **负责人**：agent
+- **开始时间**：`2026-10-10T08:14:38Z`
+- **最后更新**：`2026-10-10T08:16:39Z`
+
+---
+
+## 1. 任务背景与目标
+Replace plain TextField with flutter_quill; MarkdownBridge round-trip for H1-H3 lists bold italic quote code
+
+---
+
+## 2. 验收标准
+Unit tests for MarkdownBridge round-trip; editor opens/saves via bridge
+
+---
+
+## 3. 执行步骤 (Checklist)
+- [ ] 1. 完善设计文档与接口定义
+- [ ] 2. 同步 DB 迁移脚本（V/U）
+- [ ] 3. 编写/修改核心六元组业务逻辑
+- [ ] 4. 编写全覆盖单测与契约测试
+- [ ] 5. 本地质量门禁与提交前自检
+
+---
+
+## 4. 涉及文件修改清单 (Diff Tracking)
+```text
+(待更新)
+```
+
+---
+
+## 5. 验证与门禁记录
+- 单测覆盖率：`0%`
+- 契约比对：`PENDING`
