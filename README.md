@@ -20,14 +20,20 @@ flutter run -d windows
 
 ## Package (Windows release)
 
+按 hs-dev-skill（spec v2.4）：**交付产物落在 `output/`**，不是 `build/`。
+
 ```powershell
 flutter build windows --release
-# Artifact:
-#   build\windows\x64\runner\Release\ai_writer.exe
-# Ship the whole Release folder (exe + flutter_windows.dll + data\ + plugins).
+$src = "build\windows\x64\runner\Release"
+$dst = "output\windows-x64\ai_writer-1.0.0"
+New-Item -ItemType Directory -Force -Path $dst | Out-Null
+Copy-Item "$src\*" $dst -Recurse -Force
+# Deliverable:
+#   output\windows-x64\ai_writer-1.0.0\ai_writer.exe
+# Ship the whole folder (exe + flutter_windows.dll + data\ + plugins).
 ```
 
-Smoke-checked: release exe starts (process stays alive); package ≈ 32 MB (14 files).
+已落盘：`output/windows-x64/ai_writer-1.0.0/`（≈31 MB / 14 files）；exe 冒烟通过。详见 `output/README.md`。
 
 ## E2E / verification
 

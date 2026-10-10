@@ -34,6 +34,11 @@ migrate_working_dir/
 /dist/
 /coverage/
 
+# hs-dev-skill: deliverables live under output/; keep docs, ignore binaries
+/output/**
+!/output/README.md
+!/output/.gitkeep
+
 # Symbolication related
 app.*.symbols
 
