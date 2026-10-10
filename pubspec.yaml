@@ -41,7 +41,6 @@ dependencies:
   flutter_quill: ^11.6.0
   markdown_quill: ^4.3.0
   dio: ^5.11.1
-  flutter_secure_storage: ^11.2.0
 
 dev_dependencies:
   flutter_test:
