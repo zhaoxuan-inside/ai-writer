@@ -45,12 +45,12 @@ flutter test
 #   folder sync push/pull overwrite
 ```
 
-Latest gate: **37** automated tests green + Windows release build + exe smoke launch.
+Latest gate: **43** automated tests green + Windows release build + exe smoke launch.
 
 ## Status
 
 - Design frozen (PRD / architecture / ports)
-- MVP slices done: DocumentStore, library, Quill WYSIWYG, AI assist, Sync (Folder/GitHub/NativeStub)
+- MVP slices done: DocumentStore, library, Quill WYSIWYG, AI assist, Sync (Folder/WebDAV/GitHub/NativeStub)
 - Secrets (API key / GitHub PAT) use app-private `SharedPreferences` via `SecretStore` so Windows builds without VS ATL (`flutter_secure_storage` C++ plugin removed)
 
 **Windows note:** Developer Mode may be required for plugin symlinks during `flutter run`: `start ms-settings:developers`

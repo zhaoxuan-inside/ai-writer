@@ -7,6 +7,7 @@ import '../adapters/github_sync_provider.dart';
 import '../adapters/native_cloud_stub_sync_provider.dart';
 import '../adapters/openai_compatible_ai_provider.dart';
 import '../adapters/quill_markdown_bridge.dart';
+import '../adapters/webdav_sync_provider.dart';
 import '../core/ai/ai_credentials_store.dart';
 import '../core/ai/ai_models.dart';
 import '../core/ai/ai_provider.dart';
@@ -93,6 +94,9 @@ final activeSyncProviderProvider = FutureProvider<SyncProvider>((ref) async {
     case SyncProviderId.folder:
       final cfg = await store.loadFolderConfig();
       return FolderSyncProvider(remoteFolder: cfg.remoteFolder);
+    case SyncProviderId.webdav:
+      final cfg = await store.loadWebDavConfig();
+      return WebDavSyncProvider(config: cfg);
     case SyncProviderId.github:
       final cfg = await store.loadGitHubConfig();
       return GitHubSyncProvider(config: cfg);

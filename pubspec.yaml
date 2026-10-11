@@ -41,6 +41,7 @@ dependencies:
   flutter_quill: ^11.6.0
   markdown_quill: ^4.3.0
   dio: ^5.11.1
+  xml: ^7.0.1
 
 dev_dependencies:
   flutter_test:

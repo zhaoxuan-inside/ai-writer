@@ -10,6 +10,10 @@ const _kGhRepo = 'sync_gh_repo';
 const _kGhBranch = 'sync_gh_branch';
 const _kGhPrefix = 'sync_gh_prefix';
 const _kGhToken = 'sync_gh_token';
+const _kDavUrl = 'sync_dav_url';
+const _kDavUser = 'sync_dav_user';
+const _kDavPass = 'sync_dav_password';
+const _kDavPrefix = 'sync_dav_prefix';
 
 class SyncSettingsStore {
   SyncSettingsStore({SecretStore? secretStore})
@@ -57,5 +61,24 @@ class SyncSettingsStore {
     await prefs.setString(_kGhBranch, config.branch.trim());
     await prefs.setString(_kGhPrefix, config.pathPrefix.trim());
     await _secrets.write(_kGhToken, config.token.trim());
+  }
+
+  Future<WebDavSyncConfig> loadWebDavConfig() async {
+    final prefs = await SharedPreferences.getInstance();
+    final password = await _secrets.read(_kDavPass) ?? '';
+    return WebDavSyncConfig(
+      baseUrl: prefs.getString(_kDavUrl) ?? '',
+      username: prefs.getString(_kDavUser) ?? '',
+      password: password,
+      pathPrefix: prefs.getString(_kDavPrefix) ?? '',
+    );
+  }
+
+  Future<void> saveWebDavConfig(WebDavSyncConfig config) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kDavUrl, config.baseUrl.trim());
+    await prefs.setString(_kDavUser, config.username.trim());
+    await prefs.setString(_kDavPrefix, config.pathPrefix.trim());
+    await _secrets.write(_kDavPass, config.password.trim());
   }
 }

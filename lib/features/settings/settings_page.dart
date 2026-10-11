@@ -23,11 +23,16 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   final _ghBranch = TextEditingController();
   final _ghPrefix = TextEditingController();
   final _ghToken = TextEditingController();
+  final _davUrl = TextEditingController();
+  final _davUser = TextEditingController();
+  final _davPassword = TextEditingController();
+  final _davPrefix = TextEditingController();
 
   SyncProviderId _syncProvider = SyncProviderId.folder;
   bool _loading = true;
   bool _obscureAi = true;
   bool _obscureGh = true;
+  bool _obscureDav = true;
 
   @override
   void initState() {
@@ -46,6 +51,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     _ghBranch.dispose();
     _ghPrefix.dispose();
     _ghToken.dispose();
+    _davUrl.dispose();
+    _davUser.dispose();
+    _davPassword.dispose();
+    _davPrefix.dispose();
     super.dispose();
   }
 
@@ -55,6 +64,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     final providerId = await syncStore.loadSelectedProvider();
     final folder = await syncStore.loadFolderConfig();
     final github = await syncStore.loadGitHubConfig();
+    final dav = await syncStore.loadWebDavConfig();
     if (!mounted) return;
     _baseUrl.text = ai.baseUrl;
     _apiKey.text = ai.apiKey;
@@ -66,6 +76,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     _ghBranch.text = github.branch;
     _ghPrefix.text = github.pathPrefix;
     _ghToken.text = github.token;
+    _davUrl.text = dav.baseUrl;
+    _davUser.text = dav.username;
+    _davPassword.text = dav.password;
+    _davPrefix.text = dav.pathPrefix;
     setState(() => _loading = false);
   }
 
@@ -99,6 +113,14 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         branch: _ghBranch.text.trim().isEmpty ? 'main' : _ghBranch.text.trim(),
         pathPrefix: _ghPrefix.text.trim(),
         token: _ghToken.text.trim(),
+      ),
+    );
+    await syncStore.saveWebDavConfig(
+      WebDavSyncConfig(
+        baseUrl: _davUrl.text.trim(),
+        username: _davUser.text.trim(),
+        password: _davPassword.text.trim(),
+        pathPrefix: _davPrefix.text.trim(),
       ),
     );
     ref.invalidate(aiProviderConfigProvider);
@@ -189,6 +211,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       child: Text('Sync folder'),
                     ),
                     DropdownMenuItem(
+                      value: SyncProviderId.webdav,
+                      child: Text('WebDAV'),
+                    ),
+                    DropdownMenuItem(
                       value: SyncProviderId.github,
                       child: Text('GitHub'),
                     ),
@@ -212,6 +238,50 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                         icon: const Icon(Icons.folder_open_outlined),
                         onPressed: _pickSyncFolder,
                       ),
+                    ),
+                  ),
+                ],
+                if (_syncProvider == SyncProviderId.webdav) ...[
+                  TextField(
+                    controller: _davUrl,
+                    decoration: const InputDecoration(
+                      labelText: 'Server URL',
+                      hintText: 'https://dav.example.com/remote.php/dav/files/me',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _davUser,
+                    decoration: const InputDecoration(
+                      labelText: 'Username (optional)',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _davPassword,
+                    obscureText: _obscureDav,
+                    decoration: InputDecoration(
+                      labelText: 'Password (optional)',
+                      border: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureDav
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                        ),
+                        onPressed: () =>
+                            setState(() => _obscureDav = !_obscureDav),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _davPrefix,
+                    decoration: const InputDecoration(
+                      labelText: 'Path prefix (optional)',
+                      border: OutlineInputBorder(),
                     ),
                   ),
                 ],
